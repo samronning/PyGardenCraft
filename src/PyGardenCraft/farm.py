@@ -28,6 +28,6 @@ class Farm:
 def validate_block_matrix(block_matrix):
     if (block_matrix.size == 0):
         raise FarmError("A farm's block matrix can't have a width or height of zero")
-    for el in np.array(block_matrix):
-        if (el != 0 and el != 1 and el != 2 and el != 3):
-            raise FarmError("All of a farm's block values must be within 0-3")
+    valid_values = [block_type.value for block_type in BLOCK]
+    if not np.isin(block_matrix, valid_values).all():
+        raise FarmError("All of a farm's block values must be within 0-3")
